@@ -8,7 +8,6 @@ var langscontainer = wrapper.querySelector(".language")
 
 function data(result) {
     wrapper.classList.add("active")
-    console.log(result[0][0][0])
     showInfor.innerHTML = `${result[0][0][0]}`;
 }
 
@@ -24,7 +23,7 @@ langs.forEach(lang => {
 })
 
 inputWord.addEventListener("keyup", e => {
-    inputWord.value = e.target.value.replace(/""/g,",")
+    inputWord.value = e.target.value.replace(/""/g, ",")
     if (inputWord.focus) {
         wrapper.classList.remove("active")
     }
@@ -39,9 +38,8 @@ inputWord.addEventListener("keyup", e => {
 function fetchAPI(word, langchoosed) {
     wrapper.classList.remove("active")
     var url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${langchoosed}&dt=t&q=${word}`;
-    console.log(url)
     fetch(url)
         .then(response => response.json())
         .then(result => data(result, word))
-        .catch(err => showInfor.innerHTML = `${word} is not found`);
+        .catch(err => err)
 }
